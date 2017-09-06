@@ -1,17 +1,9 @@
-     *  SND2MERG                      : System
+     *  SND2MERG                      : SND2ME
      *  ######........................: SND2ME MAIL-VERSAND
      *        RG......................: RPG IV
      *  VERSION.......................: V0R1M0
 
      *  00000000                        BRC      06.09.2017
-
-     * Beschreibung
-
-
-     **************************************************************************
-     *- ZUSATZ : Beschreibung
-     *- UUUUUU     TT.MM.JJJJ
-     **************************************************************************
 
 
      *#########################################################################
@@ -21,11 +13,6 @@
      H MAIN( Main ) ALWNULL( *USRCTL ) AUT( *EXCLUDE )
      H DATFMT( *ISO- ) TIMFMT( *ISO. ) DECEDIT( '0,' )
      H DFTACTGRP( *NO ) ACTGRP( *CALLER ) DEBUG( *YES ) USRPRF( *OWNER )
-
-
-     *#########################################################################
-     *- Tabellen/Dateien
-     *#########################################################################
 
 
      *#########################################################################
@@ -107,6 +94,7 @@
                             USRPRF=*OWNER, DYNUSRPRF=*OWNER,
                             CLOSQLCSR=*ENDMOD, COMMIT=*NONE;
 
+      // DTAQ-Erstellen und an OUTQ haengen
        aCmd='CRTDTAQ DTAQ('+%Trim(paLibrary)+'/'+%Trim(paQueue)+
             ') MAXLEN(128) AUT(*EXCLUDE)';
        System(aCmd);
@@ -114,6 +102,7 @@
             ') DTAQ('+%Trim(paLibrary)+'/'+%Trim(paQueue)+')';
        System(aCmd);
 
+      // Endlos-Loop Abarbeiten
       DoW ( Loop );
          Clear aData;
         Monitor;
@@ -130,6 +119,7 @@
            nSuccess=TRUE;
         EndIf;
 
+      // Mailadresse lesen, konvertieren und versenden
         If nSuccess;
            Exec SQL SELECT STRIP(SMTPUID) CONCAT '@' CONCAT STRIP(DOMROUTE)
                       INTO :aMail
