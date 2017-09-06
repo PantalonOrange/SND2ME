@@ -37,5 +37,11 @@
                           SPLNBR(&FILE_NBR)
              MONMSG     MSGID(CPF0000)
              ENDDO
+             IF ( &SUCCESS = '0' ) THEN(DO)
+             CHGSPLFA   FILE(&FILE_NAME) +
+                          JOB(&JOB_NBR/&JOB_USER/&JOB_NAME) +
+                          SPLNBR(&FILE_NBR) OUTQ(ERROR)
+             MONMSG     MSGID(CPF0000)
+             ENDDO
 
              ENDPGM
