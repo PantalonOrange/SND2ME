@@ -1,0 +1,41 @@
+             PGM (&Q_NAME &Q_LIB &FILE_NAME &JOB_NBR &JOB_USER -
+                  &JOB_NAME &FILE_NBR &MAIL)
+
+             DCL        VAR(&Q_NAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&Q_LIB) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE_NAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&JOB_NBR) TYPE(*CHAR) LEN(6)
+             DCL        VAR(&JOB_USER) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&JOB_NAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE_NBR) TYPE(*CHAR) LEN(9)
+             DCL        VAR(&MAIL) TYPE(*CHAR) LEN(128)
+             DCL        VAR(&SUCCESS) TYPE(*LGL) LEN(1) VALUE('1')
+             DCL        VAR(&PDF_NAME) TYPE(*CHAR) LEN(256)
+             DCLPRCOPT  LOG(*NO) ALWRTVSRC(*YES) TEXT('SND2ME +
+                          MAIL-VERSAND') USRPRF(*OWNER) +
+                          AUT(*EXCLUDE) DFTACTGRP(*NO) ACTGRP(*CALLER)
+
+             CHGVAR     VAR(&PDF_NAME) VALUE('/tmp/' *TCAT +
+                          &FILE_NAME *TCAT &JOB_NAME *TCAT +
+                          &JOB_USER *TCAT &JOB_NBR *TCAT &FILE_NBR +
+                          *TCAT '.pdf')
+
+             CPYSPLF    FILE(&FILE_NAME) TOFILE(*TOSTMF) +
+                          JOB(&JOB_NBR/&JOB_USER/&JOB_NAME) +
+                          SPLNBR(&FILE_NBR) TOSTMF(&PDF_NAME) +
+                          WSCST(*PDF)
+             MONMSG     MSGID(CPF0000) EXEC(CHGVAR VAR(&SUCCESS) +
+                          VALUE('0'))
+
+             IF ( &SUCCESS = '1' ) THEN(DO)
+             SNDSMTPEMM RCP((&MAIL)) SUBJECT(&FILE_NAME) +
+                          NOTE('SND2ME MAIL') ATTACH((&PDF_NAME *PDF))
+             RMVLNK     OBJLNK(&PDF_NAME)
+             MONMSG     MSGID(CPF0000)
+             DLTSPLF    FILE(&FILE_NAME) +
+                          JOB(&JOB_NBR/&JOB_USER/&JOB_NAME) +
+                          SPLNBR(&FILE_NBR)
+             MONMSG     MSGID(CPF0000)
+             ENDDO
+
+             ENDPGM
