@@ -93,7 +93,7 @@
                       FROM QUSRSYS.QATMSMTPA A JOIN QUSRSYS.QAOKL02A B
                         ON (B.WOS1USRP=:aUser AND B.WOS1DDEN=A.USERID AND
                             B.WOS1DDGN=A.ADDRESS);
-          If ( SQLCode=stsOK );
+          If ( SQLCode = stsOK );
             Monitor;
                EC#SendSpool(dsData.dsQualJobName :dsData.aFileName
                             :%Char(dsData.iFileNbr) :aMail);
