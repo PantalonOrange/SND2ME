@@ -1,10 +1,6 @@
 
      *  00000000                        BRC     06.09.2017
 
-     *#########################################################################
-     *- Kopfdefinitionen
-     *#########################################################################
-
      H MAIN( Main ) ALWNULL( *USRCTL ) AUT( *EXCLUDE )
      H DATFMT( *ISO- ) TIMFMT( *ISO. ) DECEDIT( '0,' )
      H DFTACTGRP( *NO ) ACTGRP( *CALLER ) DEBUG( *YES ) USRPRF( *OWNER )
@@ -81,12 +77,10 @@
      D  aFiller                      56A
      *-------------------------------------------------------------------------
 
-      // SQL-Optionen
        Exec SQL SET OPTION DATFMT=*ISO, DATSEP='-', TIMFMT=*ISO, TIMSEP='.',
                             USRPRF=*OWNER, DYNUSRPRF=*OWNER,
                             CLOSQLCSR=*ENDMOD, COMMIT=*NONE;
 
-      // DTAQ erstellen und an OUTQ binden
        aCmd='CRTDTAQ DTAQ('+%Trim(paLibrary)+'/'+%Trim(paQueue)+
             ') MAXLEN(128) AUT(*EXCLUDE)';
        System(aCmd);
@@ -110,7 +104,6 @@
            nSuccess=TRUE;
         EndIf;
 
-      // Mailadresse lesen, PDF konvertieren und versenden
         If nSuccess;
            Exec SQL SELECT STRIP(SMTPUID) CONCAT '@' CONCAT STRIP(DOMROUTE)
                       INTO :aMail
@@ -132,7 +125,6 @@
         EndIf;
       EndDo;
 
-      // Programm beenden
        ExitProgram=TRUE;
        Return;
 
