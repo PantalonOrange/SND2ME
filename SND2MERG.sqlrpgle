@@ -77,6 +77,7 @@
 
       DoW ( Loop );
          Clear dsData;
+         Reset nSuccess;
         Monitor;
            EC#RCVDTAQ(pdsQualName.aOutQ :pdsQualName.aLibrary
                       :%Len(dsData) :dsData :30);
