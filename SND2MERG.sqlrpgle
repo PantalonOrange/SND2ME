@@ -196,8 +196,8 @@ END-DS;
 
       If Get_Mailadress(QueryDS.UserName :Mail);
         QualJobNameDS = NormalizeJobName(QueryDS.QJobName);
-        EC#SendSpool(QualJobNameDS :QueryDS.FileName :%Char(QueryDS.FileNum)
-                     :Mail);
+        EC#SendSpool(QualJobNameDS :QueryDS.FileName
+                     :%Char(QueryDS.FileNum) :Mail);
       EndIf;
     EndDo;
     Sleep(10);
@@ -214,11 +214,11 @@ DCL-PI Get_Mailadress IND;
 END-PI;
 //-------------------------------------------------------------------------
 
-  Exec SQL SELECT STRIP(A.SMTPUID) CONCAT '@' CONCAT STRIP(A.DOMROUTE)
-                   INTO :pMail
-                   FROM QUSRSYS.QATMSMTPA A JOIN QUSRSYS.QAOKL02A B
-                     ON (B.WOS1USRP = :pUser AND B.WOS1DDEN = A.USERID AND
-                         B.WOS1DDGN = A.ADDRESS);
+  Exec SQL SELECT TRIM(A.SMTPUID) CONCAT '@' CONCAT TRIM(A.DOMROUTE)
+             INTO :pMail
+             FROM QUSRSYS.QATMSMTPA A JOIN QUSRSYS.QAOKL02A B
+               ON (B.WOS1USRP = :pUser AND B.WOS1DDEN = A.USERID AND
+                   B.WOS1DDGN = A.ADDRESS);
   Return ( SQLCode = stsOK );
 
 END-PROC;
