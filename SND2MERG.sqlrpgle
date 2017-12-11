@@ -26,7 +26,7 @@ CTL-OPT MAIN( Main ) ALWNULL( *USRCTL ) AUT( *EXCLUDE )
         DFTACTGRP( *NO ) ACTGRP( *NEW ) DEBUG( *YES ) USRPRF( *OWNER );
 
 // Prototypes -------------------------------------------------------------
-/INCLUDE *LIBL/QRPGLECPY,SYSTEM
+/INCLUDE SND2ME/QRPGLECPY,SYSTEM
 
 // Program prototype ------------------------------------------------------
 DCL-PR Main EXTPGM( 'SND2MERG' );
@@ -57,8 +57,8 @@ DCL-PR EC#SendSpool EXTPGM( 'SND2MECL' );
 END-PR;
 
 // Global constants -------------------------------------------------------
-/INCLUDE *LIBL/QRPGLECPY,SQLDEF
-/INCLUDE *LIBL/QRPGLECPY,CONSTANTS
+/INCLUDE SND2ME/QRPGLECPY,SQLDEF
+/INCLUDE SND2ME/QRPGLECPY,CONSTANTS
 
 // Global variables -------------------------------------------------------
 DCL-DS QualEntryParm_Template QUALIFIED;
@@ -113,7 +113,7 @@ DCL-PI Do_It_With_DTAQ;
  pQualName LIKEDS( QualEntryParm_Template ) CONST;
 END-PI;
 
-/INCLUDE *LIBL/QRPGLECPY,QRCVDTAQ
+/INCLUDE SND2ME/QRPGLECPY,QRCVDTAQ
 
 DCL-S Success IND INZ( TRUE );
 DCL-S Cmd VARCHAR(128) INZ;
@@ -168,7 +168,7 @@ DCL-PI Do_It_With_API;
  pQualName LIKEDS( QualEntryParm_Template ) CONST;
 END-PI;
 
-/INCLUDE *LIBL/QRPGLECPY,SLEEP
+/INCLUDE SND2ME/QRPGLECPY,SLEEP
 
 DCL-S Mail CHAR(128) INZ;
 DCL-DS QualJobNameDS LIKEDS( QualJobName_Template ) INZ;
