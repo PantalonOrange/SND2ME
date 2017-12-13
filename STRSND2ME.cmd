@@ -1,7 +1,7 @@
              CMD        PROMPT('START SND2ME MAIL-PDF') TEXT('START +
                           SND2ME MAIL-PDF') ALLOW(*ALL) MODE(*ALL) +
                           ALWLMTUSR(*NO) HLPID(*CMD) +
-                          HLPPNLGRP(SND2ME/SND2ME) PRDLIB(SND2ME) +
+                          HLPPNLGRP(SND2ME/STRSND2ME) PRDLIB(SND2ME) +
                           AUT(*EXCLUDE)
 
              PARM       KWD(OUTQ) TYPE(QUAL) MIN(1) CHOICE('Valid +
