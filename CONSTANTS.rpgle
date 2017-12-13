@@ -1,5 +1,6 @@
-      /if not defined (#CONSTANTS)  
-      /define #CONSTANTS            
-     D TRUE            C                    *ON
-     D FALSE           C                    *OFF
-      /endif
+**FREE
+/if not defined (#CONSTANTS)
+/define #CONSTANTS
+DCL-C TRUE *ON;
+DCL-C FALSE *OFF;
+/endif
