@@ -1,8 +1,8 @@
-      /if not defined (#SQLDEF)   
-      /define #SQLDEF             
-     D stsOK           C                   0
-     D stsEoF          C                   100
-     D stsNoF          C                   100
-
-     D Loop            S               N   INZ( *ON )
-      /endif
+**FREE
+/if not defined (#SQLDEF)
+/define #SQLDEF
+ DCL-C stsOK 0;
+ DCL-C stsEoF 100;
+ DCL-C stsNoF 100;
+ DCL-S Loop IND INZ( TRUE );
+/endif
