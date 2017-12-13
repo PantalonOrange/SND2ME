@@ -1,9 +1,11 @@
-      /if not defined (#API_QRCVDTAQ)  
-      /define #API_QRCVDTAQ            
-     D EC#RCVDTAQ      PR                  EXTPGM( 'QRCVDTAQ' )
-     D  DQName                       10A    CONST
-     D  DQLib                        10A    CONST
-     D  DQLen                         5P 0  CONST 
-     D  DQDataDS                            LIKEDS( DataDS )
-     D  DQWait                        5P 0  CONST
-      /endif
+**FREE
+/if not defined (#API_QRCVDTAQ)
+/define #API_QRCVDTAQ
+DCL-PR EC#RCVDTAQ EXTPGM( 'QRCVDTAQ' );
+ DQName CHAR(10) CONST;
+ DQLibrary CHAR(10) CONST;
+ DQLength PACKED(5 :0) CONST;
+ DQDataDS LIKEDS( DataDS );
+ DQWait PACKED(5 :0) CONST;
+END-PR;
+/endif
