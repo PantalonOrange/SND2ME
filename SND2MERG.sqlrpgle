@@ -1,5 +1,5 @@
 **FREE
-//- Copyright (c) 2017 Christian Brunner
+//- Copyright (c) 2017, 2018 Christian Brunner
 //-
 //- Permission is hereby granted, free of charge, to any person obtaining a copy
 //- of this software and associated documentation files (the "Software"), to deal
@@ -159,6 +159,10 @@ END-DS;
       EndMon;
     EndIf;
   EndDo;
+
+  Cmd='CHGOUTQ OUTQ('+%Trim(pQualName.Library)+'/'+
+       %Trim(pQualName.OutQ)+') DTAQ(*NONE)';
+  System(Cmd);
 
 END-PROC;
 //* Do_It_With_API ********************************************************
