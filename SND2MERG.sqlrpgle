@@ -177,6 +177,7 @@ END-PI;
 
 DCL-S i UNS(3) INZ;
 DCL-S Mail CHAR(128) INZ;
+DCL-S RecordsFound LIKE( SQLEr3 ) INZ;
 DCL-DS QualJobNameDS LIKEDS( QualJobName_Template ) INZ;
 DCL-DS QueryDS QUALIFIED DIM(10) INZ;
  FileName CHAR(10);
@@ -196,7 +197,8 @@ END-DS;
     Exec SQL OPEN C#SQLAPI;
     If ( SQLCode = stsOK );
       Exec SQL FETCH FROM C#SQLAPI FOR 10 ROWS INTO :QueryDS;
-      For i = 1 To SQLEr3;
+      RecordsFound = SQLEr3;
+      For i = 1 To RecordsFound;
         If Get_Mailadress(QueryDS(i).UserName :Mail);
           QualJobNameDS = NormalizeJobName(QueryDS(i).QJobName);
           EC#SendSpool(QualJobNameDS :QueryDS(i).FileName
