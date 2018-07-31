@@ -62,18 +62,18 @@ END-PR;
 /INCLUDE SND2ME/QRPGLECPY,CONSTANTS
 
 // Global variables -------------------------------------------------------
-DCL-DS QualEntryParm_Template QUALIFIED;
+DCL-DS QualEntryParm_Template TEMPLATE QUALIFIED;
   OutQ    CHAR(10);
   Library CHAR(10);
 END-DS;
 
-DCL-DS QualJobName_Template QUALIFIED;
+DCL-DS QualJobName_Template TEMPLATE QUALIFIED;
   JobName CHAR(10);
   JobUser CHAR(10);
   JobNbr  CHAR(6);
 END-DS;
 
-DCL-DS QualQueueName_Template QUALIFIED;
+DCL-DS QualQueueName_Template TEMPLATE QUALIFIED;
   QueueName    CHAR(10);
   QueueLibrary CHAR(10);
 END-DS;
