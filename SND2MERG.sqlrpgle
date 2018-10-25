@@ -42,7 +42,7 @@ DCL-PR Do_It_With_API;
   QualName LIKEDS(QualEntryParm_Template) CONST;
 END-PR;
 DCL-PR LoopJob IND END-PR;
-DCL-PR Get_Mailadress IND;
+DCL-PR Get_Mailaddress IND;
   User CHAR(10) CONST;
   Mail CHAR(128);
 END-PR;
@@ -89,9 +89,9 @@ DCL-PROC Main;
  END-PI;
 //-------------------------------------------------------------------------
 
- Exec SQL SET OPTION DATFMT=*ISO, DATSEP='-', TIMFMT=*ISO, TIMSEP='.',
-                     USRPRF=*OWNER, DYNUSRPRF=*OWNER,
-                     CLOSQLCSR = *ENDMOD, COMMIT=*NONE;
+ Exec SQL SET OPTION DATFMT = *ISO, DATSEP = '-', TIMFMT = *ISO, TIMSEP = '.',
+                     USRPRF = *OWNER, DYNUSRPRF = *OWNER,
+                     CLOSQLCSR = *ENDMOD, COMMIT = *NONE;
 
  Select;
    When ( %Parms() = 1 );
@@ -151,7 +151,7 @@ DCL-PROC Do_It_With_DTAQ;
 
    Success = ( Success And DataDS.Function <> '' );
 
-   If Success And Get_Mailadress(DataDS.QualJobName.JobUser :Mail);
+   If Success And Get_Mailaddress(DataDS.QualJobName.JobUser :Mail);
      Monitor;
        EC#SendSpool(DataDS.QualJobName :DataDS.FileName
                     :%Char(DataDS.FileNbr) :Mail);
@@ -203,15 +203,15 @@ DCL-PROC Do_It_With_API;
    If ( SQLCode = stsOK );
      Exec SQL FETCH FROM C#SQLAPI FOR 10 ROWS INTO :QueryDS;
      RecordsFound = SQLEr3;
+     Exec SQL CLOSE C#SQLAPI;
      For i = 1 To RecordsFound;
-       If Get_Mailadress(QueryDS(i).UserName :Mail);
+       If Get_Mailaddress(QueryDS(i).UserName :Mail);
          QualJobNameDS = NormalizeJobName(QueryDS(i).QJobName);
          EC#SendSpool(QualJobNameDS :QueryDS(i).FileName
                       :%Char(QueryDS(i).FileNum) :Mail);
        EndIf;
      EndFor;
    EndIf;
-   Exec SQL CLOSE C#SQLAPI;
    Sleep(10);
  EndDo;
 
@@ -229,11 +229,11 @@ DCL-PROC LoopJob;
  Return ( Success And Not %ShtDn );
 
 END-PROC;
-//* Get_Mailadress ********************************************************
-//- Read mailadress from systemdirectory
+//* Get_Mailaddress *******************************************************
+//- Read mailaddress from systemdirectory
 //*************************************************************************
-DCL-PROC Get_Mailadress;
- DCL-PI Get_Mailadress IND;
+DCL-PROC Get_Mailaddress;
+ DCL-PI Get_Mailaddress IND;
    pUser CHAR(10) CONST;
    pMail CHAR(128);
  END-PI;
