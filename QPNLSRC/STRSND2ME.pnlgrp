@@ -1,0 +1,30 @@
+:PNLGRP.
+
+:HELP NAME='STRSND2ME'.Start SND2ME Mail-PDF - HELP
+:P.
+With this command you can convert your spooled files and send them to yourselfe as PDF-attachment.
+:EHELP.
+
+:HELP NAME='STRSND2ME/OUTQ'.Outqueue-Name - Help
+:XH3.Name of the target outqueue
+:P.
+Please insert the name of your outqueue.
+:EHELP.
+
+:HELP NAME='STRSND2ME/TYPE'.Type - Help
+:XH3.Type of work
+:P.
+Please select one of the following choices:
+:P.
+:PARML.
+:PT.:PK DEF.*DTAQ:EPK.
+:PD.
+Use a dataqueue (DTAQ) for your outqueue
+:P.
+:PT.:PV.*API:EPV.
+:PD.
+Use the SQL-View OUTPUT_QUEUE_ENTRIES
+:EPARML.
+:EHELP.
+
+:EPNLGRP.
