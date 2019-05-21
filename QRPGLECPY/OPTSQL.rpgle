@@ -1,0 +1,11 @@
+**FREE
+
+/IF NOT DEFINED (OPTSQL)
+
+/DEFINE OPTSQL
+
+ Exec SQL SET OPTION DATFMT = *ISO, DATSEP = '-', TIMFMT = *ISO, TIMSEP = '.',
+                     USRPRF = *OWNER, DYNUSRPRF = *OWNER,
+                     CLOSQLCSR = *ENDMOD, COMMIT = *NONE;
+
+/ENDIF

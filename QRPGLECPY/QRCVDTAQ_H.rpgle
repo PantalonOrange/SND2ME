@@ -1,0 +1,15 @@
+**FREE
+
+/IF NOT DEFINED (API_QRCVDTAQ)
+
+/DEFINE API_QRCVDTAQ
+
+DCL-PR recieveDataQueue EXTPGM('QRCVDTAQ');
+ DataQueueName CHAR(10) CONST;
+ DataQueueLibrary CHAR(10) CONST;
+ DataQueueLength PACKED(5 :0) CONST;
+ DataQueueDataDS LIKEDS( DataDS );
+ DataQueueWait PACKED(5 :0) CONST;
+END-PR;
+
+/ENDIF

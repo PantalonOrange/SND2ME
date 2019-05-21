@@ -1,0 +1,11 @@
+**FREE
+
+/IF NOT DEFINED (API_SLEEP)
+
+/DEFINE API_SLEEP
+
+DCL-PR sleep UNS(10) EXTPROC('sleep');
+ Seconds UNS(10) VALUE;
+END-PR;
+
+/ENDIF
